@@ -1,0 +1,14 @@
+before_install:
+  - "sudo apt-get update && sudo apt-get install --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended pandoc"
+script:
+  - mkdir _build
+  - pandoc testing.md -o testing.pdf
+deploy:
+  provider: releases
+  api_key:
+    secure: [YOUR KEY]
+  file:
+  - _build/testing.pdf
+  skip_cleanup: true
+  on:
+    tags: true
